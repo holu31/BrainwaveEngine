@@ -1,0 +1,4 @@
+bin/
+build/
+core.so
+core.dll
