@@ -17,9 +17,9 @@ build.cpp:
 
 build.game:
 
-	mkdir -p build/$(build)/assets
+	mkdir -p build/$(build)/
 
 	$(CC) $(CFLAGS) -o build/$(build)/$(build) $(file) ./core.so
 
-	cp -r assets/ build/$(build)/assets/
+	cp -r assets/ build/$(build)/
 	cp core.so build/$(build)/
