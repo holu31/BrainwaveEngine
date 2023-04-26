@@ -6,6 +6,7 @@
 
 #include <render/mesh.hpp>
 #include <render/shaders.hpp>
+#include <core/input.hpp>
 
 #include <iostream>
 #include <map>
@@ -17,6 +18,7 @@ namespace Core {
 
         GLFWwindow* m_window;
         float m_prevDeltaTime;
+        Input *input;
 
         public:
 

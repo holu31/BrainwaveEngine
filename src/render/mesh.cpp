@@ -2,11 +2,14 @@
 #include <render/mesh.hpp>
 #include <render/camera.hpp>
 
-Core::Mesh::Mesh(Core::MeshType type,
-    Core::Shaders *shader)
+Render::Mesh::Mesh(Render::MeshType type,
+    Render::Shaders *shader,
+	Render::Texture *texture)
 {
     if(type == MESH_CUBE){
         this->m_pShader = shader;
+		this->m_pTexture = texture;
+
         this->positions = {
 			1.0f, 1.0f, 1.0f,
 			1.0f, -1.0f, 1.0f,
@@ -90,23 +93,60 @@ Core::Mesh::Mesh(Core::MeshType type,
 			0.8f, 0.8f, 0.8f, 1.0f,
 			0.8f, 0.8f, 0.8f, 1.0f,
         };
+
+		this->uv = {
+			0.0f, 1.0f,
+			1.0f, 1.0f,
+			1.0f, 0.0f,
+			0.0f, 0.0f,
+
+			0.0f, 1.0f,
+			1.0f, 1.0f,
+			1.0f, 0.0f,
+			0.0f, 0.0f,
+
+			0.0f, 1.0f,
+			1.0f, 1.0f,
+			1.0f, 0.0f,
+			0.0f, 0.0f,
+
+			0.0f, 1.0f,
+			1.0f, 1.0f,
+			1.0f, 0.0f,
+			0.0f, 0.0f,
+
+			0.0f, 1.0f,
+			1.0f, 1.0f,
+			1.0f, 0.0f,
+			0.0f, 0.0f,
+
+			0.0f, 1.0f,
+			1.0f, 1.0f,
+			1.0f, 0.0f,
+			0.0f, 0.0f,
+
+			0.0f, 1.0f,
+			1.0f, 1.0f,
+			1.0f, 0.0f,
+			0.0f, 0.0f,
+		};
     }
 
 	this->Init();
 }
 
-void Core::Mesh::updateBuffers() {
+void Render::Mesh::updateBuffers() {
 	glBindVertexArray(vao);
 
 	setArrayBuffer(0, 3, m_posBuffer, positions);
 	setElementArrayBuffer(m_indexBuffer, indices);
 	setArrayBuffer(1, 4, m_colBuffer, colors);
-	//setArrayBuffer(2, 2, uvBuffer, uv);
+	setArrayBuffer(2, 2, m_uvBuffer, uv);
 
 	glBindVertexArray(GL_FALSE);
 }
 
-void Core::Mesh::setArrayBuffer(
+void Render::Mesh::setArrayBuffer(
 	int pos, int size, unsigned int id, std::vector<float> data)
 {
 	glBindBuffer(GL_ARRAY_BUFFER, id);
@@ -116,7 +156,7 @@ void Core::Mesh::setArrayBuffer(
 	glBindBuffer(GL_ARRAY_BUFFER, GL_FALSE);
 }
 
-void Core::Mesh::setElementArrayBuffer(
+void Render::Mesh::setElementArrayBuffer(
 	unsigned int id, std::vector<int> data)
 {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id);
@@ -125,24 +165,32 @@ void Core::Mesh::setElementArrayBuffer(
 }
 
 
-void Core::Mesh::Init(){
+void Render::Mesh::Init(){
 	glGenVertexArrays(1, &vao);
 	glGenBuffers(1, &m_posBuffer);
 	glGenBuffers(1, &m_indexBuffer);
 	glGenBuffers(1, &m_colBuffer);
+	glGenBuffers(1, &m_uvBuffer);
+
+	if(m_pTexture != nullptr){
+		m_pShader->Bind();
+		m_pTexture->import();
+		m_pShader->Unbind();
+	}
 
 	this->updateBuffers();
 }
 
-void Core::Mesh::draw(){
+void Render::Mesh::draw(){
 	m_pShader->Bind();
 	glBindVertexArray(vao);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
+	if(m_pTexture != nullptr) m_pTexture->bind();
 
-	if(Core::Camera::current != nullptr){
+	if(Render::Camera::current != nullptr){
 
-		m_pShader->setUniform("projMat", Core::Camera::current->projMatGet());
-		m_pShader->setUniform("viewMat", Core::Camera::current->viewMatGet());
+		m_pShader->setUniform("projMat", Render::Camera::current->projMatGet());
+		m_pShader->setUniform("viewMat", Render::Camera::current->viewMatGet());
 	}
 
 	transMat = glm::mat4(1.0f);
@@ -159,8 +207,9 @@ void Core::Mesh::draw(){
 
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, nullptr);
 
-	m_pShader->Unbind();
+	if(m_pTexture != nullptr) m_pShader->Unbind();
 
 	glBindVertexArray(GL_FALSE);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_FALSE);
+	m_pTexture->unbind();
 }

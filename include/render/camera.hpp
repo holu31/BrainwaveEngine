@@ -9,14 +9,14 @@
 
 #include <iostream>
 
-namespace Core {
+namespace Render {
 
     class Camera {
 
     public:
         static Camera *current;
 
-	float fov = 90.0f;
+        float fov = 90.0f;
         float near = 0.01f;
         float far = 100.0f;
 

@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include <iostream>
 
-Core::Shaders::Shaders(const std::string &vertFilepath,
+Render::Shaders::Shaders(const std::string &vertFilepath,
     const std::string &fragFilepath)
 {
     vertCode = this->readFile(vertFilepath);
@@ -17,7 +17,7 @@ Core::Shaders::Shaders(const std::string &vertFilepath,
     setSource(fShader, fragCode.data());
 }
 
-std::vector<char> Core::Shaders::readFile(const std::string& filepath)
+std::vector<char> Render::Shaders::readFile(const std::string& filepath)
 {
     std::ifstream file(filepath, std::ios::ate | std::ios::binary);
 
@@ -35,7 +35,7 @@ std::vector<char> Core::Shaders::readFile(const std::string& filepath)
     return buffer;
 }
 
-void Core::Shaders::setSource(int id, const char *source){
+void Render::Shaders::setSource(int id, const char *source){
 	glShaderSource(id, 1, &source, NULL);
 	glCompileShader(id);
 
@@ -62,17 +62,25 @@ void Core::Shaders::setSource(int id, const char *source){
 	glDeleteShader(id);
 }
 
-void Core::Shaders::Bind(){
+void Render::Shaders::Bind(){
     glUseProgram(program);
 }
 
-void Core::Shaders::Unbind(){
+void Render::Shaders::Unbind(){
     glUseProgram(GL_FALSE);
 }
 
-void Core::Shaders::setUniform(
+void Render::Shaders::setUniform(
     std::string uniform, glm::mat4 value
 ) {
     int matrixLocation = glGetUniformLocation(program, uniform.c_str());
 	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, glm::value_ptr(value));
+}
+
+int Render::Shaders::getULoc(std::string uname){
+    return glGetUniformLocation(program, uname.c_str());
+}
+
+void Render::Shaders::setUInt(std::string uname, int value){
+    glUniform1i(getULoc(uname), value);
 }

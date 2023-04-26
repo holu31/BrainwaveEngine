@@ -8,11 +8,12 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <render/shaders.hpp>
+#include <render/texture.hpp>
 
 #include <iostream>
 #include <vector>
 
-namespace Core {
+namespace Render {
 
     enum MeshType {
         MESH_CUBE,
@@ -24,14 +25,17 @@ namespace Core {
         GLuint m_posBuffer;
         GLuint m_indexBuffer;
         GLuint m_colBuffer;
+        GLuint m_uvBuffer;
 
         std::vector<float> positions;
         std::vector<int> indices;
         std::vector<float> colors;
+        std::vector<float> uv;
 
         glm::mat4 transMat = glm::mat4(1.0f);
 
-        Core::Shaders *m_pShader;
+        Render::Shaders *m_pShader;
+        Render::Texture *m_pTexture;
 
         void Init();
         void updateBuffers();
@@ -44,8 +48,10 @@ namespace Core {
         glm::vec3 rot = glm::vec3(0.0f);
         glm::vec3 scale = glm::vec3(1.0f);
 
-            Mesh(MeshType type, Core::Shaders *shader);
-            void draw();
+        Mesh(Render::MeshType type,
+            Render::Shaders *shader,
+            Render::Texture *texture = nullptr);
+        void draw();
 
     };
 

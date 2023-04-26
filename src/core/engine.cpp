@@ -48,6 +48,8 @@ Core::Engine::Engine(std::string title,
 
     glfwSetFramebufferSizeCallback(m_window, frameBufferSizeCallback);
 
+    input = new Core::Input(m_window);
+
     //glfwSetKeyCallback(m_window, input);
     
     this->_start();
@@ -60,9 +62,8 @@ Core::Engine::Engine(std::string title,
         float deltaTime = (float) glfwGetTime() - m_prevDeltaTime;
 		m_prevDeltaTime = (float) glfwGetTime();
 
-        this->_process(deltaTime * 150.0f);
+        this->_process(deltaTime);
 
         glfwSwapBuffers(m_window);
-        glFinish();
     }
 }

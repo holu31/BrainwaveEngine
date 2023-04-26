@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 
-namespace Core {
+namespace Render {
 
     class Shaders {
 
@@ -31,8 +31,8 @@ namespace Core {
             void setUniform(
                 std::string uniform, glm::mat4 value
             );
-
-            //Shaders(const Pipeline&) = delete;
+            int getULoc(std::string uname);
+            void setUInt(std::string uname, int value);
 
         private:
 
