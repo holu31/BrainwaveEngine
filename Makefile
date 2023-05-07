@@ -1,7 +1,8 @@
 CC=g++
-CFLAGS = -fPIC -O2 -g -I include/ -std=c++20
+CFLAGS = -fPIC -O2 -g -I include/ -I /usr/include/bullet/ -std=c++20
 
-LDFLAGS = -lglfw -lvulkan -lstb -ldl -lpthread -lX11 -lXxf86vm -lXrandr -lXi
+LDFLAGS = -lglfw -lvulkan -lstb -lBulletCollision -lLinearMath -lBulletDynamics \
+ -ldl -lpthread -lX11 -lXxf86vm -lXrandr -lXi
 
 protected=password123
 
@@ -15,6 +16,8 @@ build.cpp:
 	$(CC) $(CFLAGS) -c -o bin/mesh.o src/render/mesh.cpp
 	$(CC) $(CFLAGS) -c -o bin/camera.o src/render/camera.cpp
 	$(CC) $(CFLAGS) -c -o bin/texture.o src/render/texture.cpp
+	$(CC) $(CFLAGS) -c -o bin/physics.o src/physics/physics.cpp
+	$(CC) $(CFLAGS) -c -o bin/physicsObj.o src/physics/physicsObj.cpp
 	
 	$(CC) $(CFLAGS) -shared -o core.so $(wildcard bin/*.o) glad/glad.c $(LDFLAGS)
 
@@ -22,7 +25,7 @@ build.game:
 
 	mkdir -p build/$(build)/
 
-	$(CC) $(CFLAGS) -o build/$(build)/$(build) $(file) ./core.so
+	$(CC) $(CFLAGS) -o build/$(build)/$(build) $(file) ./core.so -lBulletCollision -lLinearMath -lBulletDynamics -lBulletSoftBody
 
 	cp -r resources/ build/$(build)/
 	cp core.so build/$(build)/

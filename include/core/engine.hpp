@@ -7,10 +7,13 @@
 #include <render/mesh.hpp>
 #include <render/shaders.hpp>
 #include <core/input.hpp>
+#include <core/config.hpp>
 
 #include <iostream>
 #include <map>
 #include <stdint.h>
+
+#include <physics/physics.hpp>
 
 namespace Core {
 
@@ -20,9 +23,11 @@ namespace Core {
         float m_prevDeltaTime;
         Input *input;
 
+        Physics::Physics *physics;
+
         public:
 
-            Engine(std::string title, int width, int height);
+            Engine(Core::Config config);
             ~Engine();
 
             void _process(float deltaTime);
