@@ -1,5 +1,7 @@
 #version 330
 
+// TODO: mesh.frag -> mesh.cpp
+
 in vec3 fPos;
 in vec4 fCol;
 in vec2 fUv;

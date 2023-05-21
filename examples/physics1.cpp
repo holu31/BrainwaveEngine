@@ -3,6 +3,7 @@
 #include <render/camera.hpp>
 #include <physics/physicsObj.hpp>
 #include <cstdlib>
+#include <cmath>
 
 Render::Mesh *mesh;
 Render::Camera *camera;
@@ -29,9 +30,6 @@ void Core::Engine::_process(float deltaTime){
     mesh->pos = glm::vec3(transform.getOrigin().getX(),
                           transform.getOrigin().getY(),
                           transform.getOrigin().getZ());
-    /*std::cout << transform.getOrigin().getX() <<
-                          transform.getOrigin().getY() <<
-                          transform.getOrigin().getZ() << std::endl;*/
 }
 
 void Core::Engine::_input(int key){
