@@ -1,6 +1,4 @@
-#version 330
-
-// TODO: mesh.vert -> mesh.cpp
+#version 430
 
 layout (location = 0) in vec3 vPos;
 layout (location = 1) in vec4 vCol;

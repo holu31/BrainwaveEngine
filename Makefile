@@ -4,8 +4,6 @@ CFLAGS = -fPIC -O2 -g -I include/ -I /usr/include/bullet/ -I /usr/include/freety
 LDFLAGS = -lglfw -lvulkan -lstb -lBulletCollision -lLinearMath -lBulletDynamics \
  -ldl -lpthread -lX11 -lXxf86vm -lXrandr -lXi -lfreetype
 
-protected=password123
-
 .PHONY: all
 all: build.cpp
 
