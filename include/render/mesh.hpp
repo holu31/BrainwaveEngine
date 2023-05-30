@@ -9,6 +9,7 @@
 
 #include <render/shaders.hpp>
 #include <render/texture.hpp>
+#include <render/obj.hpp>
 
 #include <iostream>
 #include <vector>
@@ -47,6 +48,13 @@ namespace Render {
         glm::vec3 pos = glm::vec3(0.0f);
         glm::vec3 rot = glm::vec3(0.0f);
         glm::vec3 scale = glm::vec3(1.0f);
+
+        Mesh(std::vector<float> positions,
+            std::vector<int> indices,
+            std::vector<float> colors,
+            std::vector<float> uv,
+            Render::Shaders *shader,
+            Render::Texture *texture = nullptr);
 
         Mesh(Render::MeshType type,
             Render::Shaders *shader,

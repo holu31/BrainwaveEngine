@@ -15,6 +15,7 @@ build.cpp:
 	$(CC) $(CFLAGS) -c -o bin/camera.o src/render/camera.cpp
 	$(CC) $(CFLAGS) -c -o bin/texture.o src/render/texture.cpp
 	$(CC) $(CFLAGS) -c -o bin/text.o src/render/text.cpp
+	$(CC) $(CFLAGS) -c -o bin/obj.o src/render/obj.cpp
 	$(CC) $(CFLAGS) -c -o bin/physics.o src/physics/physics.cpp
 	$(CC) $(CFLAGS) -c -o bin/physicsObj.o src/physics/physicsObj.cpp
 	

@@ -2,6 +2,23 @@
 #include <render/mesh.hpp>
 #include <render/camera.hpp>
 
+Render::Mesh::Mesh(std::vector<float> positions,
+    std::vector<int> indices,
+    std::vector<float> colors,
+    std::vector<float> uv,
+    Render::Shaders *shader,
+    Render::Texture *texture)
+{
+	this->m_pShader = shader;
+	this->m_pTexture = texture;
+	this->positions = positions;
+	this->colors = colors;
+	this->uv = uv;
+    this->indices = indices; 
+
+	this->Init();
+}
+
 Render::Mesh::Mesh(Render::MeshType type,
     Render::Shaders *shader,
 	Render::Texture *texture)
