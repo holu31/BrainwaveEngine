@@ -9,20 +9,18 @@
 Render::Mesh *mesh;
 Render::Camera *camera;
 Render::Shaders *shader;
-Render::Texture *texture;
 Render::ObjLoader *obj;
 
 void Core::Engine::_start(){
     shader = new Render::Shaders("resources/shaders/mesh.vert",
                             	"resources/shaders/mesh.frag");
-    texture = new Render::Texture("resources/cringe.jpg");
     camera = new Render::Camera();
     obj = new Render::ObjLoader("resources/models/test.bwm");
     mesh = new Render::Mesh(obj->positions,
         obj->indices,
         obj->colors,
         obj->uv,
-        shader, texture=texture);
+        shader);
 
     camera->pos = glm::vec3(0.0f, 0.0f, 3.0f);
 }

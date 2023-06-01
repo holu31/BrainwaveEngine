@@ -28,12 +28,13 @@ Render::ObjLoader::ObjLoader(
             indices.push_back(get.x);
             indices.push_back(get.y);
             indices.push_back(get.z);
-        } else if (strcmp(lineHeader, "с") == 0){
+        } else if (strcmp(lineHeader, "c") == 0){
             glm::vec4 get;
             fscanf(file, "%f %f %f %f\n", &get.x, &get.y, &get.z, &get.w);
             colors.push_back(get.x);
             colors.push_back(get.y);
             colors.push_back(get.z);
+            colors.push_back(get.w);
         } else if (strcmp(lineHeader, "u") == 0){
             glm::vec2 get;
             fscanf(file, "%f %f\n", &get.x, &get.y);
