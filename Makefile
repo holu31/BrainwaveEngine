@@ -10,12 +10,12 @@ all: build.cpp
 build.cpp:
 	$(CC) $(CFLAGS) -c -o bin/engine.o src/core/engine.cpp
 	$(CC) $(CFLAGS) -c -o bin/input.o src/core/input.cpp
+	$(CC) $(CFLAGS) -c -o bin/obj.o src/core/obj.cpp
 	$(CC) $(CFLAGS) -c -o bin/shaders.o src/render/shaders.cpp
 	$(CC) $(CFLAGS) -c -o bin/mesh.o src/render/mesh.cpp
 	$(CC) $(CFLAGS) -c -o bin/camera.o src/render/camera.cpp
 	$(CC) $(CFLAGS) -c -o bin/texture.o src/render/texture.cpp
-	$(CC) $(CFLAGS) -c -o bin/text.o src/render/text.cpp
-	$(CC) $(CFLAGS) -c -o bin/obj.o src/render/obj.cpp
+	$(CC) $(CFLAGS) -c -o bin/text.o src/ui/text.cpp
 	$(CC) $(CFLAGS) -c -o bin/physics.o src/physics/physics.cpp
 	$(CC) $(CFLAGS) -c -o bin/physicsObj.o src/physics/physicsObj.cpp
 	

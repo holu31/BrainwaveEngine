@@ -15,7 +15,7 @@
 
 #include <render/shaders.hpp>
 
-namespace Render {
+namespace UI {
 
     class Text {
 

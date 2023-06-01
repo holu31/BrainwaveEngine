@@ -9,7 +9,7 @@
 
 #include <render/shaders.hpp>
 #include <render/texture.hpp>
-#include <render/obj.hpp>
+#include <core/obj.hpp>
 
 #include <iostream>
 #include <vector>

@@ -2,20 +2,20 @@
 
 #include <core/engine.hpp>
 #include <render/camera.hpp>
-#include <render/obj.hpp>
+#include <core/obj.hpp>
 
 #include <cstdlib>
 
 Render::Mesh *mesh;
 Render::Camera *camera;
 Render::Shaders *shader;
-Render::ObjLoader *obj;
+Core::ObjLoader *obj;
 
 void Core::Engine::_start(){
     shader = new Render::Shaders("resources/shaders/mesh.vert",
                             	"resources/shaders/mesh.frag");
     camera = new Render::Camera();
-    obj = new Render::ObjLoader("resources/models/test.bwm");
+    obj = new Core::ObjLoader("resources/models/test.bwm");
     mesh = new Render::Mesh(obj->positions,
         obj->indices,
         obj->colors,

@@ -13,7 +13,7 @@
 #include <render/mesh.hpp>
 #include <render/shaders.hpp>
 
-namespace Render {
+namespace Core {
 
     class ObjLoader {
 

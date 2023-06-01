@@ -1,8 +1,8 @@
-#include <render/obj.hpp>
+#include <core/obj.hpp>
 
 #include <iostream>
 
-Render::ObjLoader::ObjLoader(
+Core::ObjLoader::ObjLoader(
     std::string path
 ){
     FILE * file = fopen(path.c_str(), "r");

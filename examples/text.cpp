@@ -1,14 +1,12 @@
 #include <iostream>
 #include <core/engine.hpp>
 #include <render/camera.hpp>
-#include <render/text.hpp>
+#include <ui/text.hpp>
 
-//Render::Camera *camera;
-Render::Text *text;
+UI::Text *text;
 
 void Core::Engine::_start(){
-    //camera = new Render::Camera();
-    text = new Render::Text("Hello!", "resources/fonts/arial.ttf");
+    text = new UI::Text("Hello!", "resources/fonts/arial.ttf");
 }
 
 void Core::Engine::_process(float deltaTime){

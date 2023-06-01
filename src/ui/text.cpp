@@ -1,9 +1,9 @@
-#include <render/text.hpp>
+#include <ui/text.hpp>
 #include <stdexcept>
 
 // TODO: rendering && linking freetype
 
-Render::Text::Text(std::string text, std::string fontPath){
+UI::Text::Text(std::string text, std::string fontPath){
     this->text = text;
     this->shader = new Render::Shaders("resources/shaders/text.vert",
                             	"resources/shaders/text.frag");;
@@ -59,7 +59,7 @@ Render::Text::Text(std::string text, std::string fontPath){
     FT_Done_FreeType(ft);  
 }
 
-void Render::Text::draw(){
+void UI::Text::draw(){
     glm::mat4 projection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
     unsigned int VAO, VBO;
     glGenVertexArrays(1, &VAO);
