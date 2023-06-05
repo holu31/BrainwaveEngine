@@ -30,5 +30,12 @@ build.game:
 	cp -r resources/ build/$(build)/
 	cp core.so build/$(build)/
 
+build.mapcreator:
+
+	$(CC) $(CFLAGS) -o MapCreator/MapCreator MapCreator/src/MapCreator.cpp ./core.so -lstb -lBulletCollision -lLinearMath -lBulletDynamics -lBulletSoftBody
+
+	cp -r resources/ MapCreator/
+	cp core.so MapCreator/
+
 clean:
 	rm bin/*

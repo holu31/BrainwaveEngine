@@ -1,0 +1,15 @@
+Map:
+- name: first_cube
+  type: cube
+  position:
+  - x: 0
+    y: 0
+    z: -2
+  id: 1
+- name: second_cube
+  type: cube
+  position:
+  - x: 5
+    y: 0
+    z: -2
+  id: 2
