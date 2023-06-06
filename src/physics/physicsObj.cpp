@@ -1,4 +1,6 @@
 #include <physics/physicsObj.hpp>
+#include <core/engine.hpp>
+
 #include <iostream>
 
 
@@ -6,7 +8,8 @@ Physics::PhysicsObject::PhysicsObject(
     btCollisionShape *shape, btMotionState *transform, float mass,
         glm::vec3 inertia, float restitution)
 {
-    this->Init(shape, transform, mass, inertia, restitution);
+    LOG(this->Init(shape, transform, mass, inertia, restitution), \
+        "INFO", "initializing physics object");
 }
 
 Physics::PhysicsObject::PhysicsObject(
@@ -17,13 +20,13 @@ Physics::PhysicsObject::PhysicsObject(
         btDefaultMotionState* motionState = new btDefaultMotionState(btTransform(
             btQuaternion(0, 0, 0, 1),
             btVector3(0, 0, 0)));
-        this->Init(
+        LOG(this->Init(
             boxShape,
             motionState,
             mass,
             glm::vec3(0.0f),
             .25f
-        );
+        ), "INFO", "initializing physics object");
     }
 }
 
@@ -37,9 +40,10 @@ void Physics::PhysicsObject::Init(
     this->inertia = inertia;
     this->restitution = restitution;
 
-    btRigidBody::btRigidBodyConstructionInfo rbConstrInfo(btScalar(mass), transform, shape);
+    LOG(btRigidBody::btRigidBodyConstructionInfo rbConstrInfo(btScalar(mass), transform, shape), \
+        "INFO", "configuration physics object");
     rbConstrInfo.m_restitution = restitution;
-    rb = new btRigidBody(rbConstrInfo);
+    LOG(rb = new btRigidBody(rbConstrInfo), "INFO", "creating rigidbody");
     rb->forceActivationState(DISABLE_DEACTIVATION);
-    Physics::dynamicsWorld->addRigidBody(rb);
+    LOG(Physics::dynamicsWorld->addRigidBody(rb), "INFO", "added physics object to dynamics world");
 }

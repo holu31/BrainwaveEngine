@@ -1,4 +1,5 @@
 #include <render/texture.hpp>
+#include <core/engine.hpp>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
@@ -6,10 +7,10 @@
 Render::Texture::Texture(std::string texturePath){
     int width, height, nrChannels;
 
-    data = stbi_load(texturePath.c_str(), &width,
-        &height, &nrChannels, 4);
+    LOG(data = stbi_load(texturePath.c_str(), &width,
+        &height, &nrChannels, 4), "INFO", "stbi loading texture");
 
-    glGenTextures(1, &id);  
+    LOG(glGenTextures(1, &id), "INFO", "generating texture; from image -> opengl");  
     size = glm::ivec2(width, height);
     channels = nrChannels;
 }
@@ -32,7 +33,7 @@ void Render::Texture::import() {
 
     this->unbind();
 
-    stbi_image_free(data);
+    LOG(stbi_image_free(data), "INFO", "free image from memory");
 }
 
 void Render::Texture::bind(){

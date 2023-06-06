@@ -6,8 +6,7 @@
 
 Core::Engine::~Engine()
 {
-    std::cout << "destroyed window\n";
-    this->_exit_window();
+    LOG(this->_exit_window(), "INFO", "destroyed window");
 
     glfwDestroyWindow(this->m_window);
     glfwTerminate();

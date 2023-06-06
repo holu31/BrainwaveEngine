@@ -29,7 +29,7 @@ void Core::Engine::_input(int key){
 }
 
 void Core::Engine::_exit_window(){
-    
+
 }
 
 auto main() -> int {

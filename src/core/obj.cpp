@@ -1,4 +1,5 @@
 #include <core/obj.hpp>
+#include <core/engine.hpp>
 
 #include <iostream>
 
@@ -7,7 +8,7 @@ Core::ObjLoader::ObjLoader(
 ){
     FILE * file = fopen(path.c_str(), "r");
     if(file == NULL){
-        throw std::runtime_error("Impossible to open the file!");
+        throw LOG(fopen(path.c_str(), "r"), "ERROR", "impossible to open the file!");
     }
 
     while(true){

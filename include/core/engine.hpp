@@ -15,6 +15,10 @@
 
 #include <physics/physics.hpp>
 
+#define LOG(fun, type, log) \
+        printf("%s:%s:[%s]: %s\n", #fun, __FILE__, type, log); \
+    fun;
+
 namespace Core {
 
     class Engine {

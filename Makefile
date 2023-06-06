@@ -4,10 +4,10 @@ CFLAGS = -fPIC -O2 -g -I include/ -I /usr/include/bullet/ -I /usr/include/freety
 LDFLAGS = -lglfw -lvulkan -lstb -lBulletCollision -lLinearMath -lBulletDynamics \
  -ldl -lpthread -lX11 -lXxf86vm -lXrandr -lXi -lfreetype
 
-.PHONY: all
-all: build.cpp
+.PHONY: all clean
+all: all/core.so
 
-build.cpp:
+all/core.so:
 	$(CC) $(CFLAGS) -c -o bin/engine.o src/core/engine.cpp
 	$(CC) $(CFLAGS) -c -o bin/input.o src/core/input.cpp
 	$(CC) $(CFLAGS) -c -o bin/obj.o src/core/obj.cpp

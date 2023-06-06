@@ -2,6 +2,8 @@
 #include <render/mesh.hpp>
 #include <render/camera.hpp>
 
+#include <core/engine.hpp>
+
 Render::Mesh::Mesh(std::vector<float> positions,
     std::vector<int> indices,
     std::vector<float> colors,
@@ -16,7 +18,7 @@ Render::Mesh::Mesh(std::vector<float> positions,
 	this->uv = uv;
     this->indices = indices; 
 
-	this->Init();
+	LOG(this->Init(), "INFO", "initialize mesh object");
 }
 
 Render::Mesh::Mesh(Render::MeshType type,
@@ -183,19 +185,19 @@ void Render::Mesh::setElementArrayBuffer(
 
 
 void Render::Mesh::Init(){
-	glGenVertexArrays(1, &vao);
-	glGenBuffers(1, &m_posBuffer);
-	glGenBuffers(1, &m_indexBuffer);
-	glGenBuffers(1, &m_colBuffer);
-	glGenBuffers(1, &m_uvBuffer);
+	LOG(glGenVertexArrays(1, &vao), "INFO", "generating vertex arrays");
+	LOG(glGenBuffers(1, &m_posBuffer), "INFO", "generating buffers");
+	LOG(glGenBuffers(1, &m_indexBuffer), "INFO", "generating buffers");
+	LOG(glGenBuffers(1, &m_colBuffer), "INFO", "generating buffers");
+	LOG(glGenBuffers(1, &m_uvBuffer), "INFO", "generating buffers");
 
 	if(m_pTexture != nullptr){
 		m_pShader->Bind();
-		m_pTexture->import();
+		LOG(m_pTexture->import(), "INFO", "rebinding shaders, import texture");
 		m_pShader->Unbind();
 	}
 
-	this->updateBuffers();
+	LOG(this->updateBuffers(), "INFO", "updating buffers");
 }
 
 void Render::Mesh::draw(){
