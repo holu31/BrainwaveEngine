@@ -11,6 +11,7 @@ all/core.so:
 	$(CC) $(CFLAGS) -c -o bin/engine.o src/core/engine.cpp
 	$(CC) $(CFLAGS) -c -o bin/input.o src/core/input.cpp
 	$(CC) $(CFLAGS) -c -o bin/obj.o src/core/obj.cpp
+	$(CC) $(CFLAGS) -c -o bin/maploader.o src/core/maploader.cpp
 	$(CC) $(CFLAGS) -c -o bin/shaders.o src/render/shaders.cpp
 	$(CC) $(CFLAGS) -c -o bin/mesh.o src/render/mesh.cpp
 	$(CC) $(CFLAGS) -c -o bin/camera.o src/render/camera.cpp

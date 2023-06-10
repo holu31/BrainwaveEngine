@@ -1,0 +1,10 @@
+[
+  {
+    "name": "cube1",
+    "positions": [0, 0, 1]
+  },
+  {
+    "name": "cube2",
+    "positions": [0, 2, 4]
+  }
+]

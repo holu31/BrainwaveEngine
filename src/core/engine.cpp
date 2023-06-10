@@ -21,7 +21,7 @@ void frameBufferSizeCallback(GLFWwindow *window,
 Core::Engine::Engine(Core::Config config)
 {
 
-    glfwInit();
+    LOG(glfwInit(), "INFO", "initializate glfw");
 
     m_prevDeltaTime = (float) glfwGetTime();
 
@@ -33,13 +33,15 @@ Core::Engine::Engine(Core::Config config)
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 	glfwWindowHint(GLFW_SAMPLES, config.m_msaa);
 
-    this->m_window = glfwCreateWindow(config.m_width, config.m_height,
-                            config.m_title.c_str(), nullptr, nullptr);
-    if (!m_window) throw std::runtime_error("failed to create window");
+    LOG(this->m_window = glfwCreateWindow(config.m_width, config.m_height,
+                            config.m_title.c_str(), nullptr, nullptr), "INFO", \
+                            "creating window");
+    if (!m_window) throw LOG(!m_window, "ERROR", "failed to create window");
 
     glfwMakeContextCurrent(this->m_window);
     if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
-        throw std::runtime_error("glad run failed");
+        throw LOG(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress), "ERROR", \
+            "glad run failed");
     }
 
     glEnable(GL_DEPTH_TEST);
