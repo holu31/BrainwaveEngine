@@ -1,23 +1,25 @@
 #include <ui/text.hpp>
-#include <stdexcept>
+#include <core/engine.hpp>
 
-// TODO: rendering && linking freetype
+#include <stdexcept>
 
 UI::Text::Text(std::string text, std::string fontPath){
     this->text = text;
     this->shader = new Render::Shaders("resources/shaders/text.vert",
                             	"resources/shaders/text.frag");;
 
-    if (FT_Init_FreeType(&ft))
+    LOG(auto init_freetype = FT_Init_FreeType(&ft), \
+        "FONT", "initialize freetype");
+    if (init_freetype)
     {
-        throw std::runtime_error("FONT-ERR: could not init FreeType Library");
+        throw LOG(FT_Init_FreeType(&ft), "FONT-ERR", "could not init FreeType Library");
     }
 
     if (FT_New_Face(ft, fontPath.c_str(), 0, &face))
     {
-        throw std::runtime_error("FONT-ERR: failed to load font");
+        throw LOG(FT_New_Face(ft, fontPath.c_str(), 0, &face), "FONT-ERR", "failed to load font");
     }
-    FT_Set_Pixel_Sizes(face, 0, 48);
+    LOG(FT_Set_Pixel_Sizes(face, 0, 48), "FONT", "setting default pixel sizes");
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
@@ -25,7 +27,7 @@ UI::Text::Text(std::string text, std::string fontPath){
     {
         if (FT_Load_Char(face, text[c], FT_LOAD_RENDER))
         {
-            std::cout << "FONT-ERR: failed to load symbol from font." << std::endl;
+            LOG(FT_Load_Char(face, text[c], FT_LOAD_RENDER), "FONT-ERR", "failed to load symbol from font.");
             continue;
         }
         unsigned int texture;
@@ -56,7 +58,8 @@ UI::Text::Text(std::string text, std::string fontPath){
     }
 
     FT_Done_Face(face);
-    FT_Done_FreeType(ft);  
+    LOG(FT_Done_FreeType(ft), "FONT", \
+        "successful generate text & import font");  
 }
 
 void UI::Text::draw(){
