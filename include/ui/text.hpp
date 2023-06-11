@@ -17,6 +17,10 @@
 
 namespace UI {
 
+    ///
+    /// \brief Class for loading and rendering text
+    ///
+
     class Text {
 
         struct Character {
@@ -35,7 +39,17 @@ namespace UI {
         Render::Shaders *shader;
 
     public:
+
+        ///
+        /// \brief Function to initialize a class
+        /// \param text Text to be loaded
+        /// \param fontPath Full path from the game folder to download the text font
+        ///
         Text(std::string text, std::string fontPath);
+
+        ///
+        /// \brief Function to render text
+        ///
         void draw();
 
         glm::vec2 pos = glm::vec2(0.0f);

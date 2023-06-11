@@ -21,6 +21,10 @@
 
 namespace Core {
 
+    ///
+    /// \brief The main class used to draw the window and initial project settings
+    ///
+
     class Engine {
 
         GLFWwindow* m_window;
@@ -31,12 +35,35 @@ namespace Core {
 
         public:
 
+            ///
+            /// \brief Function to initialize the main class
+            /// \param config parameter for the initial configuration of the main class
+            ///
+
             Engine(Core::Config config);
             ~Engine();
 
+            ///
+            /// \brief Function for rendering, logistics and more. Called every frame
+            /// \param deltaTime time elapsed since the last frame
+            ///
             void _process(float deltaTime);
+
+            ///
+            /// \brief Starting point of interaction with the main class and its children
+            ///
             void _start();
+
+            ///
+            /// \brief Function to listen for exit from window
+            ///
             void _exit_window();
+            
+            ///
+            /// \brief Function to listen for keystrokes
+            /// \param key Number of pressed key
+            /// \warning This feature is under development
+            ///
             void _input(int key);
     };
 

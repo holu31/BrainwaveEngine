@@ -11,6 +11,10 @@
 
 namespace Render {
 
+    ///
+    /// \brief Class for texturing various objects, models and maps
+    ///
+
     class Texture {
     
     glm::ivec2 size;
@@ -20,8 +24,16 @@ namespace Render {
     unsigned int id;
 
     public:
+
+        ///
+        ///
+        /// \param texturePath Full path from the game folder to download the texture
+        ///
         Texture(std::string texturePath);
         
+        ///
+        /// \brief Function to import texture into model, object
+        ///
         void import();
         void bind();
         void unbind();

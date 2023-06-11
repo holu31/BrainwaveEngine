@@ -1,0 +1,46 @@
+\hypertarget{class_render_1_1_shaders}{}\doxysection{Render\+::Shaders Class Reference}
+\label{class_render_1_1_shaders}\index{Render::Shaders@{Render::Shaders}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_render_1_1_shaders_a465d117ed212d975e6ae9e3a33ae2b2f}\label{class_render_1_1_shaders_a465d117ed212d975e6ae9e3a33ae2b2f}} 
+{\bfseries Shaders} (const std\+::string \&vert\+Filepath, const std\+::string \&frag\+Filepath)
+\item 
+\mbox{\Hypertarget{class_render_1_1_shaders_a01cd9cffaac07be7899ccc7121d25037}\label{class_render_1_1_shaders_a01cd9cffaac07be7899ccc7121d25037}} 
+void {\bfseries Bind} ()
+\item 
+\mbox{\Hypertarget{class_render_1_1_shaders_a22e4c5db10dcbab3547b2a75923a0a3e}\label{class_render_1_1_shaders_a22e4c5db10dcbab3547b2a75923a0a3e}} 
+void {\bfseries Unbind} ()
+\item 
+\mbox{\Hypertarget{class_render_1_1_shaders_ab717883dfa5ef2b4170bbd8cf675fafd}\label{class_render_1_1_shaders_ab717883dfa5ef2b4170bbd8cf675fafd}} 
+void {\bfseries set\+Uniform} (std\+::string uniform, glm\+::mat4 value)
+\item 
+\mbox{\Hypertarget{class_render_1_1_shaders_aa7781d8e6b941a9795421a6c5be640be}\label{class_render_1_1_shaders_aa7781d8e6b941a9795421a6c5be640be}} 
+int {\bfseries get\+ULoc} (std\+::string uname)
+\item 
+\mbox{\Hypertarget{class_render_1_1_shaders_ae3a38f1f24818fff09d7712ce32d1133}\label{class_render_1_1_shaders_ae3a38f1f24818fff09d7712ce32d1133}} 
+void {\bfseries set\+UInt} (std\+::string uname, int value)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_render_1_1_shaders_a3d937827e8dd87b9335617072adcf680}\label{class_render_1_1_shaders_a3d937827e8dd87b9335617072adcf680}} 
+std\+::vector$<$ char $>$ {\bfseries vert\+Code}
+\item 
+\mbox{\Hypertarget{class_render_1_1_shaders_a5fa62a72b4a6a6955cb50aa1aed1331c}\label{class_render_1_1_shaders_a5fa62a72b4a6a6955cb50aa1aed1331c}} 
+std\+::vector$<$ char $>$ {\bfseries frag\+Code}
+\item 
+\mbox{\Hypertarget{class_render_1_1_shaders_afc624d2ceabb93fceaf318fd5c8e68c3}\label{class_render_1_1_shaders_afc624d2ceabb93fceaf318fd5c8e68c3}} 
+int {\bfseries program} = gl\+Create\+Program()
+\item 
+\mbox{\Hypertarget{class_render_1_1_shaders_a481a604e17ef1bb3820fea1593e96ac9}\label{class_render_1_1_shaders_a481a604e17ef1bb3820fea1593e96ac9}} 
+int {\bfseries v\+Shader} = gl\+Create\+Shader(GL\+\_\+\+VERTEX\+\_\+\+SHADER)
+\item 
+\mbox{\Hypertarget{class_render_1_1_shaders_a136ff1eec7b84e5e5239e7229b23f817}\label{class_render_1_1_shaders_a136ff1eec7b84e5e5239e7229b23f817}} 
+int {\bfseries f\+Shader} = gl\+Create\+Shader(GL\+\_\+\+FRAGMENT\+\_\+\+SHADER)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/render/shaders.\+hpp\end{DoxyCompactItemize}

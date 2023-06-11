@@ -1,0 +1,88 @@
+\hypertarget{class_core_1_1_engine}{}\doxysection{Core\+::Engine Class Reference}
+\label{class_core_1_1_engine}\index{Core::Engine@{Core::Engine}}
+
+
+The main class used to draw the window and initial project settings.  
+
+
+
+
+{\ttfamily \#include $<$engine.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_core_1_1_engine_a411f4b90be23e56d4f6555a58149f3af}{Engine}} (\mbox{\hyperlink{struct_core_1_1_config}{Core\+::\+Config}} config)
+\begin{DoxyCompactList}\small\item\em Function to initialize the main class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_core_1_1_engine_a299385bb27541304a63cbb770abe524b}{\+\_\+process}} (float delta\+Time)
+\begin{DoxyCompactList}\small\item\em Function for rendering, logistics and more. Called every frame. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_core_1_1_engine_a6780c634ead31237cfd06b44e05850db}\label{class_core_1_1_engine_a6780c634ead31237cfd06b44e05850db}} 
+void \mbox{\hyperlink{class_core_1_1_engine_a6780c634ead31237cfd06b44e05850db}{\+\_\+start}} ()
+\begin{DoxyCompactList}\small\item\em Starting point of interaction with the main class and its children. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_core_1_1_engine_a0bb3b33af0f9c62e10bf8d49b810d2e6}\label{class_core_1_1_engine_a0bb3b33af0f9c62e10bf8d49b810d2e6}} 
+void \mbox{\hyperlink{class_core_1_1_engine_a0bb3b33af0f9c62e10bf8d49b810d2e6}{\+\_\+exit\+\_\+window}} ()
+\begin{DoxyCompactList}\small\item\em Function to listen for exit from window. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_core_1_1_engine_a7843dfe8928acdf01594edf3c7c334ff}{\+\_\+input}} (int key)
+\begin{DoxyCompactList}\small\item\em Function to listen for keystrokes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The main class used to draw the window and initial project settings. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_core_1_1_engine_a411f4b90be23e56d4f6555a58149f3af}\label{class_core_1_1_engine_a411f4b90be23e56d4f6555a58149f3af}} 
+\index{Core::Engine@{Core::Engine}!Engine@{Engine}}
+\index{Engine@{Engine}!Core::Engine@{Core::Engine}}
+\doxysubsubsection{\texorpdfstring{Engine()}{Engine()}}
+{\footnotesize\ttfamily Core\+::\+Engine\+::\+Engine (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_core_1_1_config}{Core\+::\+Config}}}]{config }\end{DoxyParamCaption})}
+
+
+
+Function to initialize the main class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & parameter for the initial configuration of the main class \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_core_1_1_engine_a7843dfe8928acdf01594edf3c7c334ff}\label{class_core_1_1_engine_a7843dfe8928acdf01594edf3c7c334ff}} 
+\index{Core::Engine@{Core::Engine}!\_input@{\_input}}
+\index{\_input@{\_input}!Core::Engine@{Core::Engine}}
+\doxysubsubsection{\texorpdfstring{\_input()}{\_input()}}
+{\footnotesize\ttfamily void Core\+::\+Engine\+::\+\_\+input (\begin{DoxyParamCaption}\item[{int}]{key }\end{DoxyParamCaption})}
+
+
+
+Function to listen for keystrokes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Number of pressed key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+This feature is under development 
+\end{DoxyWarning}
+\mbox{\Hypertarget{class_core_1_1_engine_a299385bb27541304a63cbb770abe524b}\label{class_core_1_1_engine_a299385bb27541304a63cbb770abe524b}} 
+\index{Core::Engine@{Core::Engine}!\_process@{\_process}}
+\index{\_process@{\_process}!Core::Engine@{Core::Engine}}
+\doxysubsubsection{\texorpdfstring{\_process()}{\_process()}}
+{\footnotesize\ttfamily void Core\+::\+Engine\+::\+\_\+process (\begin{DoxyParamCaption}\item[{float}]{delta\+Time }\end{DoxyParamCaption})}
+
+
+
+Function for rendering, logistics and more. Called every frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta\+Time} & time elapsed since the last frame \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/core/engine.\+hpp\end{DoxyCompactItemize}
