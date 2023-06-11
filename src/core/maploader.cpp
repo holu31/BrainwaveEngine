@@ -11,7 +11,14 @@ Core::MapLoader::MapLoader(std::string path){
                             	"resources/shaders/mesh.frag");
 
     for(auto& [key, val] : data.items()){
-        Render::Mesh *mesh = new Render::Mesh(Render::MESH_CUBE, shader);
+        Render::Texture *texture = nullptr;
+        if(val.contains("shader")){
+            shader = new Render::Shaders(val["shader"][0], val["shader"][1]);
+        }
+        if(val.contains("texture")){
+            texture = new Render::Texture(val["texture"]);
+        }
+        Render::Mesh *mesh = new Render::Mesh(Render::MESH_CUBE, shader, texture);
         mesh->pos = glm::vec3(val["positions"][0],
                             val["positions"][1],
                             val["positions"][2]);
@@ -23,7 +30,8 @@ Core::MapLoader::MapLoader(std::string path){
 }
 
 void Core::MapLoader::draw(){
-    for(auto i = objects.begin(); i != objects.end(); i++){
-        i->second->draw();
+    for(auto object = objects.begin();
+        object != objects.end(); object++){
+            object->second->draw();
     }
 }

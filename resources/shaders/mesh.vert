@@ -12,7 +12,6 @@ out vec2 fUv;
 
 void main() {
     gl_Position = projMat * viewMat * transMat * vec4(vPos, 1.0f);
-//	gl_Position = vec4(vPos, 1.0f);
 	
 	fPos = vPos;
 	fCol = vCol;
