@@ -6,14 +6,12 @@
 Render::Mesh *mesh;
 Render::Camera *camera;
 Render::Shaders *shader;
-Render::Texture *texture;
 
 void Core::Engine::_start(){
     shader = new Render::Shaders("resources/shaders/mesh.vert",
                             	"resources/shaders/mesh.frag");
-    texture = new Render::Texture("resources/cringe.jpg");
     camera = new Render::Camera();
-    mesh = new Render::Mesh(Render::MESH_CUBE, shader, texture=texture);
+    mesh = new Render::Mesh(Render::MESH_CUBE, shader);
 
     camera->pos = glm::vec3(0.0f, 0.0f, 3.0f);
 }

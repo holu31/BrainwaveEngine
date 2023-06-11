@@ -1,33 +1,27 @@
 #include <iostream>
 #include <core/engine.hpp>
 #include <render/camera.hpp>
-#include <physics/physicsObj.hpp>
 #include <cstdlib>
-#include <cmath>
 
 Render::Mesh *mesh;
 Render::Camera *camera;
 Render::Shaders *shader;
-Physics::PhysicsObject *meshPhys;
+Render::Texture *texture;
 
 void Core::Engine::_start(){
     shader = new Render::Shaders("resources/shaders/mesh.vert",
                             	"resources/shaders/mesh.frag");
+    texture = new Render::Texture("resources/cringe.jpg");
     camera = new Render::Camera();
-    mesh = new Render::Mesh(Render::MESH_CUBE, shader, texture=texture);
-    meshPhys = new Physics::PhysicsObject(Physics::COLLISION_CUBE,
-        glm::vec3(1.0f),
-        10.0f);
+    mesh = new Render::Mesh(Render::MESH_CUBE, shader, texture);
 
     camera->pos = glm::vec3(0.0f, 0.0f, 3.0f);
 }
 
 void Core::Engine::_process(float deltaTime){
     mesh->draw();
-    btTransform transform = meshPhys->rb->getWorldTransform();
-    mesh->pos = glm::vec3(transform.getOrigin().getX(),
-                          transform.getOrigin().getY(),
-                          transform.getOrigin().getZ());
+
+    mesh->rot += glm::vec3(12.0f, 12.0f, 0.0f) * deltaTime;
 }
 
 void Core::Engine::_input(int key){
@@ -35,12 +29,12 @@ void Core::Engine::_input(int key){
 }
 
 void Core::Engine::_exit_window(){
-    
+
 }
 
 auto main() -> int {
     Core::Engine engine(Core::Config(
-        "Physics1",
+        "Cube",
         900,
         480,
         2,
