@@ -97,13 +97,13 @@ $(function() {
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        GLuint vao;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        GLuint m_posBuffer;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        GLuint m_indexBuffer;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        GLuint m_colBuffer;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        GLuint m_uvBuffer;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        GLuint m_uvBuffer;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        GLuint m_norBuffer;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        std::vector&lt;float&gt; positions;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        std::vector&lt;int&gt; indices;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        std::vector&lt;float&gt; colors;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        std::vector&lt;float&gt; uv;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        std::vector&lt;float&gt; uv;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        std::vector&lt;float&gt; normals;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        glm::mat4 transMat = glm::mat4(1.0f);</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
@@ -120,22 +120,23 @@ $(function() {
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        glm::vec3 pos = glm::vec3(0.0f);</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        glm::vec3 rot = glm::vec3(0.0f);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        glm::vec3 scale = glm::vec3(1.0f);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="class_render_1_1_mesh.html">Mesh</a>(std::vector&lt;float&gt; positions,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            std::vector&lt;int&gt; indices,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            std::vector&lt;float&gt; colors,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        glm::vec3 color = glm::vec3(0.8f);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <a class="code" href="class_render_1_1_mesh.html">Mesh</a>(std::vector&lt;float&gt; positions,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            std::vector&lt;int&gt; indices,</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            std::vector&lt;float&gt; uv,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <a class="code" href="class_render_1_1_shaders.html">Render::Shaders</a> *shader,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <a class="code" href="class_render_1_1_texture.html">Render::Texture</a> *texture = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <a class="code" href="class_render_1_1_mesh.html">Mesh</a>(Render::MeshType type,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <a class="code" href="class_render_1_1_shaders.html">Render::Shaders</a> *shader,</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <a class="code" href="class_render_1_1_texture.html">Render::Texture</a> *texture = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordtype">void</span> draw();</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    };</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            std::vector&lt;float&gt; normals,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <a class="code" href="class_render_1_1_shaders.html">Render::Shaders</a> *shader,</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <a class="code" href="class_render_1_1_texture.html">Render::Texture</a> *texture = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <a class="code" href="class_render_1_1_mesh.html">Mesh</a>(Render::MeshType type,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <a class="code" href="class_render_1_1_shaders.html">Render::Shaders</a> *shader,</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <a class="code" href="class_render_1_1_texture.html">Render::Texture</a> *texture = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordtype">void</span> draw();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    };</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
 <div class="ttc" id="aclass_render_1_1_mesh_html"><div class="ttname"><a href="class_render_1_1_mesh.html">Render::Mesh</a></div><div class="ttdef"><b>Definition:</b> mesh.hpp:23</div></div>
 <div class="ttc" id="aclass_render_1_1_shaders_html"><div class="ttname"><a href="class_render_1_1_shaders.html">Render::Shaders</a></div><div class="ttdef"><b>Definition:</b> shaders.hpp:16</div></div>
 <div class="ttc" id="aclass_render_1_1_texture_html"><div class="ttname"><a href="class_render_1_1_texture.html">Render::Texture</a></div><div class="ttdoc">Class for texturing various objects, models and maps.</div><div class="ttdef"><b>Definition:</b> texture.hpp:18</div></div>
