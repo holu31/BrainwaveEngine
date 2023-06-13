@@ -12,5 +12,3 @@ Render::DirectionalLight::DirectionalLight(
     this->specularStrength = specularStrength;
     this->lightColor = lightColor;
 }
-
-Render::DirectionalLight* Render::DirectionalLight::current = nullptr;

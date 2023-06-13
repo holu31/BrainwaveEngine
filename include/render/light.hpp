@@ -19,7 +19,6 @@ namespace Render {
     class DirectionalLight {
 
     public:
-        static DirectionalLight *current;
 
         float specularStrength;
         float ambientStrength;
