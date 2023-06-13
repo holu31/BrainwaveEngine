@@ -1,33 +1,27 @@
 #include <iostream>
-
 #include <core/engine.hpp>
 #include <render/camera.hpp>
-#include <core/obj.hpp>
-
+#include <render/light.hpp>
 #include <cstdlib>
 
 Render::Mesh *mesh;
 Render::Camera *camera;
+Render::DirectionalLight *dlight;
 Render::Shaders *shader;
-Core::ObjLoader *obj;
 
 void Core::Engine::_start(){
     shader = new Render::Shaders("resources/shaders/mesh.vert",
                             	"resources/shaders/mesh.frag");
     camera = new Render::Camera();
-    obj = new Core::ObjLoader("resources/models/test.bwm");
-    mesh = new Render::Mesh(obj->positions,
-        obj->indices,
-        obj->uv,
-        obj->normals,
-        shader);
+    dlight = new Render::DirectionalLight();
+    dlight->pos = glm::vec3(-2.0f, 0.0f, 3.0f);
+    mesh = new Render::Mesh(Render::MESH_CUBE, shader);
 
     camera->pos = glm::vec3(0.0f, 0.0f, 3.0f);
 }
 
 void Core::Engine::_process(float deltaTime){
     mesh->draw();
-
     mesh->rot += glm::vec3(12.0f, 12.0f, 0.0f) * deltaTime;
 }
 
@@ -36,12 +30,12 @@ void Core::Engine::_input(int key){
 }
 
 void Core::Engine::_exit_window(){
-    
+
 }
 
 auto main() -> int {
     Core::Engine engine(Core::Config(
-        "Obj",
+        "Cube",
         900,
         480,
         2,

@@ -1,21 +1,24 @@
 #include <stdexcept>
 #include <render/mesh.hpp>
 #include <render/camera.hpp>
+#include <render/light.hpp>
 
 #include <core/engine.hpp>
 
+#include <vector>
+
 Render::Mesh::Mesh(std::vector<float> positions,
     std::vector<int> indices,
-    std::vector<float> colors,
     std::vector<float> uv,
+	std::vector<float> normals,
     Render::Shaders *shader,
     Render::Texture *texture)
 {
 	this->m_pShader = shader;
 	this->m_pTexture = texture;
 	this->positions = positions;
-	this->colors = colors;
 	this->uv = uv;
+	this->normals = normals;
     this->indices = indices; 
 
 	LOG(this->Init(), "INFO", "initialize mesh object");
@@ -60,6 +63,38 @@ Render::Mesh::Mesh(Render::MeshType type,
 			1.0f, 1.0f, -1.0f,
 			-1.0f, 1.0f, -1.0f
         };
+		
+		this->normals = {
+			0, 0, 1,
+			0, 0, 1,
+			0, 0, 1,
+			0, 0, 1,
+
+			0, 0, -1,
+			0, 0, -1,
+			0, 0, -1,
+			0, 0, -1,
+
+			-1, 0, 0,
+			-1, 0, 0,
+			-1, 0, 0,
+			-1, 0, 0,
+
+			1, 0, 0,
+			1, 0, 0,
+			1, 0, 0,
+			1, 0, 0,
+
+			0, -1, 0,
+			0, -1, 0,
+			0, -1, 0,
+			0, -1, 0,
+
+			0, 1, 0,
+			0, 1, 0,
+			0, 1, 0,
+			0, 1, 0,
+		};
 
         this->indices = {
 			0, 1, 2,
@@ -79,38 +114,6 @@ Render::Mesh::Mesh(Render::MeshType type,
 
 			20, 21, 22,
 			22, 23, 20,
-        };
-
-        this->colors = {
-			0.8f, 0.8f, 0.8f, 1.0f,
-			0.8f, 0.8f, 0.8f, 1.0f,
-			0.8f, 0.8f, 0.8f, 1.0f,
-			0.8f, 0.8f, 0.8f, 1.0f,
-
-			0.8f, 0.8f, 0.8f, 1.0f,
-			0.8f, 0.8f, 0.8f, 1.0f,
-			0.8f, 0.8f, 0.8f, 1.0f,
-			0.8f, 0.8f, 0.8f, 1.0f,
-
-			0.8f, 0.8f, 0.8f, 1.0f,
-			0.8f, 0.8f, 0.8f, 1.0f,
-			0.8f, 0.8f, 0.8f, 1.0f,
-			0.8f, 0.8f, 0.8f, 1.0f,
-
-			0.8f, 0.8f, 0.8f, 1.0f,
-			0.8f, 0.8f, 0.8f, 1.0f,
-			0.8f, 0.8f, 0.8f, 1.0f,
-			0.8f, 0.8f, 0.8f, 1.0f,
-
-			0.8f, 0.8f, 0.8f, 1.0f,
-			0.8f, 0.8f, 0.8f, 1.0f,
-			0.8f, 0.8f, 0.8f, 1.0f,
-			0.8f, 0.8f, 0.8f, 1.0f,
-
-			0.8f, 0.8f, 0.8f, 1.0f,
-			0.8f, 0.8f, 0.8f, 1.0f,
-			0.8f, 0.8f, 0.8f, 1.0f,
-			0.8f, 0.8f, 0.8f, 1.0f,
         };
 
 		this->uv = {
@@ -159,8 +162,8 @@ void Render::Mesh::updateBuffers() {
 
 	setArrayBuffer(0, 3, m_posBuffer, positions);
 	setElementArrayBuffer(m_indexBuffer, indices);
-	setArrayBuffer(1, 4, m_colBuffer, colors);
-	setArrayBuffer(2, 2, m_uvBuffer, uv);
+	setArrayBuffer(1, 2, m_uvBuffer, uv);
+	setArrayBuffer(2, 3, m_norBuffer, normals);
 
 	glBindVertexArray(GL_FALSE);
 }
@@ -186,10 +189,10 @@ void Render::Mesh::setElementArrayBuffer(
 
 void Render::Mesh::Init(){
 	LOG(glGenVertexArrays(1, &vao), "INFO", "generating vertex arrays");
-	LOG(glGenBuffers(1, &m_posBuffer), "INFO", "generating buffers");
-	LOG(glGenBuffers(1, &m_indexBuffer), "INFO", "generating buffers");
-	LOG(glGenBuffers(1, &m_colBuffer), "INFO", "generating buffers");
-	LOG(glGenBuffers(1, &m_uvBuffer), "INFO", "generating buffers");
+	LOG(glGenBuffers(1, &m_posBuffer), "INFO", "generating positions buffers");
+	LOG(glGenBuffers(1, &m_indexBuffer), "INFO", "generating indices buffers");
+	LOG(glGenBuffers(1, &m_uvBuffer), "INFO", "generating uv buffers");
+	LOG(glGenBuffers(1, &m_norBuffer), "INFO", "generating normals buffers");
 
 	if(m_pTexture != nullptr){
 		m_pShader->Bind();
@@ -211,6 +214,33 @@ void Render::Mesh::draw(){
 		m_pShader->setUniform("projMat", Render::Camera::current->projMatGet());
 		m_pShader->setUniform("viewMat", Render::Camera::current->viewMatGet());
 	}
+	if(Render::lights.size() != 0){
+		for(int light = 0; light < Render::lights.size(); ++light){
+			glUniform3f(m_pShader->getULoc("dir_lights["+std::to_string(light)+"].viewPos"),
+																	Render::Camera::current->pos.x,
+																	Render::Camera::current->pos.y,
+																	Render::Camera::current->pos.z);
+			glUniform1f(m_pShader->getULoc("dir_lights["+std::to_string(light)+"].specularStrength"), Render::lights[light]->specularStrength);													
+			glUniform1f(m_pShader->getULoc("dir_lights["+std::to_string(light)+"].ambientStrength"), Render::lights[light]->ambientStrength);
+			glUniform3f(m_pShader->getULoc("dir_lights["+std::to_string(light)+"].pos"),
+															Render::lights[light]->pos.x,
+															Render::lights[light]->pos.y,
+															Render::lights[light]->pos.z);
+			glUniform3f(m_pShader->getULoc("dir_lights["+std::to_string(light)+"].color"),
+																Render::lights[light]->lightColor.x,
+																Render::lights[light]->lightColor.y,
+																Render::lights[light]->lightColor.z);
+		}
+		glUniform1i(m_pShader->getULoc("dir_lights_count"), Render::lights.size());
+	} else {
+		glUniform3f(m_pShader->getULoc("dir_lights[0].viewPos"), 0.0f, 0.0f, 0.0f);
+		glUniform1f(m_pShader->getULoc("dir_lights[0].specularStrength"), 0.0f);													
+		glUniform1f(m_pShader->getULoc("dir_lights[0].ambientStrength"), 1.0f);
+		glUniform3f(m_pShader->getULoc("dir_lights[0].pos"), 0.0f, 0.0f, 0.0f);
+		glUniform3f(m_pShader->getULoc("dir_lights[0].color"), 1.0f, 1.0f, 1.0f);
+		glUniform1i(m_pShader->getULoc("dir_lights_count"), 1);
+	}
+	glUniform3f(m_pShader->getULoc("color"), color.x, color.y, color.z);
 
 	transMat = glm::mat4(1.0f);
 

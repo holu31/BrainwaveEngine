@@ -16,6 +16,7 @@ all/core.so:
 	$(CC) $(CFLAGS) -c -o bin/mesh.o src/render/mesh.cpp
 	$(CC) $(CFLAGS) -c -o bin/camera.o src/render/camera.cpp
 	$(CC) $(CFLAGS) -c -o bin/texture.o src/render/texture.cpp
+	$(CC) $(CFLAGS) -c -o bin/light.o src/render/light.cpp
 	$(CC) $(CFLAGS) -c -o bin/text.o src/ui/text.cpp
 	$(CC) $(CFLAGS) -c -o bin/physics.o src/physics/physics.cpp
 	$(CC) $(CFLAGS) -c -o bin/physicsObj.o src/physics/physicsObj.cpp

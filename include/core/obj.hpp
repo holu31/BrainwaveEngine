@@ -21,7 +21,7 @@ namespace Core {
 
         std::vector<float> positions;
         std::vector<int> indices;
-        std::vector<float> colors;
+        std::vector<float> normals;
         std::vector<float> uv;
 
         ObjLoader(std::string path);

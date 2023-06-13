@@ -18,8 +18,6 @@ void Core::Engine::_start(){
 
 void Core::Engine::_process(float deltaTime){
     mesh->draw();
-    shader = new Render::Shaders("resources/shaders/mesh.vert",
-                            	"resources/shaders/mesh.frag");
 
     mesh->rot += glm::vec3(12.0f, 12.0f, 0.0f) * deltaTime;
 }

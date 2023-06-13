@@ -25,13 +25,13 @@ namespace Render {
         GLuint vao;
         GLuint m_posBuffer;
         GLuint m_indexBuffer;
-        GLuint m_colBuffer;
         GLuint m_uvBuffer;
+        GLuint m_norBuffer;
 
         std::vector<float> positions;
         std::vector<int> indices;
-        std::vector<float> colors;
         std::vector<float> uv;
+        std::vector<float> normals;
 
         glm::mat4 transMat = glm::mat4(1.0f);
 
@@ -48,11 +48,12 @@ namespace Render {
         glm::vec3 pos = glm::vec3(0.0f);
         glm::vec3 rot = glm::vec3(0.0f);
         glm::vec3 scale = glm::vec3(1.0f);
+        glm::vec3 color = glm::vec3(0.8f);
 
         Mesh(std::vector<float> positions,
             std::vector<int> indices,
-            std::vector<float> colors,
             std::vector<float> uv,
+            std::vector<float> normals,
             Render::Shaders *shader,
             Render::Texture *texture = nullptr);
 
