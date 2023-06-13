@@ -15,7 +15,15 @@
 
 namespace Core {
 
+    enum ModelType {
+        MODEL_BWM,
+        MODEL_OBJ,
+    };
+
     class ObjLoader {
+
+        void loadBwm(std::string path);
+        void loadObj(std::string path);
 
     public:
 
@@ -24,7 +32,7 @@ namespace Core {
         std::vector<float> normals;
         std::vector<float> uv;
 
-        ObjLoader(std::string path);
+        ObjLoader(Core::ModelType type, std::string path);
     };
 
 }

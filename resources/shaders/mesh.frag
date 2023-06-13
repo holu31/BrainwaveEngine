@@ -43,5 +43,5 @@ void main() {
 		result += (ambient + diffuse + specular) * color;
 	}
 
-	fragmentColor = textureSize(textureSampler, 0) == ivec2(1, 1) ? vec4(result, 1.0) : vec4(result, 1.0) + texture(textureSampler, fUv);
+	fragmentColor = textureSize(textureSampler, 0) == ivec2(1, 1) ? vec4(result, 1.0) : texture(textureSampler, fUv);
 }
