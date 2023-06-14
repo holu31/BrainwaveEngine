@@ -1,12 +1,27 @@
 [
   {
     "name": "cube1",
-    "positions": [0, 0, 1],
+    "type": "mesh",
+    "type_mesh": "cube",
+    "position": [0, 0, 1],
     "shader": ["resources/shaders/mesh.vert", "resources/shaders/mesh.frag"]
   },
   {
     "name": "cube2",
-    "positions": [0, 2, 4],
+    "type": "mesh",
+    "type_mesh": "cube",
+    "position": [0, 2, 4],
     "texture": "resources/cringe.jpg"
+  },
+  {
+    "name": "lmao",
+    "type": "sprite2d",
+    "texture": "resources/test.png",
+    "scale": [0.4, 0.2]
+  },
+  {
+    "name": "light",
+    "type": "directional light",
+    "position": [0, 4, 14]
   }
 ]
