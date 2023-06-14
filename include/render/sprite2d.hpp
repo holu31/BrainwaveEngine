@@ -15,11 +15,7 @@
 
 namespace Render {
 
-    enum MeshType {
-        MESH_CUBE,
-    };
-
-    class Mesh {
+    class Sprite2D {
 
         GLuint vao;
         GLuint m_posBuffer;
@@ -37,28 +33,18 @@ namespace Render {
         Render::Shaders *m_pShader;
         Render::Texture *m_pTexture;
 
-        void Init();
         void updateBuffers();
 
         void setArrayBuffer(int pos, int size, unsigned int id, std::vector<float> data);
         void setElementArrayBuffer(unsigned int id, std::vector<int> data);
 
         public:
-        glm::vec3 pos = glm::vec3(0.0f);
-        glm::vec3 rot = glm::vec3(0.0f);
-        glm::vec3 scale = glm::vec3(1.0f);
-        glm::vec3 color = glm::vec3(0.8f);
+        glm::vec2 pos = glm::vec2(0.0f);
+        float rot = 0.0f;
+        glm::vec2 scale = glm::vec2(1.0f);
 
-        Mesh(std::vector<float> positions,
-            std::vector<int> indices,
-            std::vector<float> uv,
-            std::vector<float> normals,
-            Render::Shaders *shader,
-            Render::Texture *texture = nullptr);
-
-        Mesh(Render::MeshType type,
-            Render::Shaders *shader,
-            Render::Texture *texture = nullptr);
+        Sprite2D(Render::Shaders *shader,
+            Render::Texture *texture);
         void draw();
 
     };

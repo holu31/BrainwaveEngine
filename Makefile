@@ -14,6 +14,7 @@ all/core.so:
 	$(CC) $(CFLAGS) -c -o bin/maploader.o src/core/maploader.cpp
 	$(CC) $(CFLAGS) -c -o bin/shaders.o src/render/shaders.cpp
 	$(CC) $(CFLAGS) -c -o bin/mesh.o src/render/mesh.cpp
+	$(CC) $(CFLAGS) -c -o bin/sprite2d.o src/render/sprite2d.cpp
 	$(CC) $(CFLAGS) -c -o bin/camera.o src/render/camera.cpp
 	$(CC) $(CFLAGS) -c -o bin/texture.o src/render/texture.cpp
 	$(CC) $(CFLAGS) -c -o bin/light.o src/render/light.cpp

@@ -21,7 +21,6 @@ void Core::Engine::_start(){
         obj->uv,
         obj->normals,
         shader);
-    mesh->scale = glm::vec3(0.5f);
 
     camera->pos = glm::vec3(0.0f, 0.0f, 3.0f);
 }
