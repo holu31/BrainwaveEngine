@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS = -fPIC -O2 -g -I include/ -I /usr/include/bullet/ -I /usr/include/freetype2/ -std=c++20
+CFLAGS = -fPIC -O2 -g -I include/ -std=c++20
 
 LDFLAGS = -lglfw -lvulkan -lstb -lBulletCollision -lLinearMath -lBulletDynamics \
  -ldl -lpthread -lX11 -lXxf86vm -lXrandr -lXi -lfreetype

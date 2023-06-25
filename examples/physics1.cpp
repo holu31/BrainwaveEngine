@@ -14,7 +14,7 @@ void Core::Engine::_start(){
     shader = new Render::Shaders("resources/shaders/mesh.vert",
                             	"resources/shaders/mesh.frag");
     camera = new Render::Camera();
-    mesh = new Render::Mesh(Render::MESH_CUBE, shader, texture=texture);
+    mesh = new Render::Mesh(Render::MESH_CUBE, shader);
     meshPhys = new Physics::PhysicsObject(Physics::COLLISION_CUBE,
         glm::vec3(1.0f),
         10.0f);
