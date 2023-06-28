@@ -95,7 +95,7 @@ void Core::Engine::_exit_window(){
 
 auto main() -> int {
     Core::Engine engine(Core::Config(
-        "MapLoading",
+        "SimpleFPS",
         900,
         480,
         2,

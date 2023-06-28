@@ -12,6 +12,7 @@ all/core.so:
 	$(CC) $(CFLAGS) -c -o bin/input.o src/core/input.cpp
 	$(CC) $(CFLAGS) -c -o bin/obj.o src/core/obj.cpp
 	$(CC) $(CFLAGS) -c -o bin/maploader.o src/core/maploader.cpp
+	$(CC) $(CFLAGS) -c -o bin/sound.o src/core/sound.cpp
 	$(CC) $(CFLAGS) -c -o bin/shaders.o src/render/shaders.cpp
 	$(CC) $(CFLAGS) -c -o bin/mesh.o src/render/mesh.cpp
 	$(CC) $(CFLAGS) -c -o bin/sprite2d.o src/render/sprite2d.cpp
@@ -27,11 +28,18 @@ all/core.so:
 build.game:
 
 	mkdir -p build/$(build)/
+	mkdir -p build/$(build)/lib64
 
-	$(CC) $(CFLAGS) -o build/$(build)/$(build) $(file) ./core.so -lBulletCollision -lLinearMath -lBulletDynamics -lBulletSoftBody
+	$(CC) $(CFLAGS) -o build/$(build)/$(build) $(file) ./core.so \
+		 ./lib64/ikpFlac.so ./lib64/ikpMP3.so ./lib64/libIrrKlang.so \
+		 -lBulletCollision -lLinearMath -lBulletDynamics -lBulletSoftBody
 
 	cp -r resources/ build/$(build)/
 	cp core.so build/$(build)/
+
+	cp lib64/ikpFlac.so build/$(build)/lib64/
+	cp lib64/ikpMP3.so build/$(build)/lib64/
+	cp lib64/libIrrKlang.so build/$(build)/lib64/
 
 build.mapcreator:
 
